@@ -242,6 +242,9 @@ html {
 }
 .pf .pf-journey-card {
   position: absolute;
+  top: 0;
+  left: 0;
+  will-change: transform;
   transform-style: preserve-3d;
   container-type: inline-size;
 }

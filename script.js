@@ -211,27 +211,32 @@ function initPortfolioMotion(root) {
     let raf = 0,
       lastY = -1,
       cur = null;
-    const apply = () => {
-      raf = 0;
+    // Layout is measured only when it can change (resize, content/image
+    // load), never inside the scroll frame, so scrolling stays layout-free.
+    let heroDoc, bioDoc, journeyH, stageH;
+    const measure = () => {
       const mainRect = main.getBoundingClientRect();
-      const stageH = root.clientHeight;
+      stageH = root.clientHeight;
       const hr = heroAnchor.getBoundingClientRect(),
         br = bioFigure.getBoundingClientRect();
-      const heroDoc = {
+      heroDoc = {
         x: hr.left - mainRect.left,
         y: hr.top - mainRect.top,
         w: hr.width,
         h: hr.height,
       };
-      const bioDoc = {
+      bioDoc = {
         x: br.left - mainRect.left,
         y: br.top - mainRect.top,
         w: br.width,
         h: br.height,
       };
-      const journeyH = bioDoc.y + bioDoc.h;
+      journeyH = bioDoc.y + bioDoc.h;
       journey.style.height = journeyH + "px";
       stage.style.height = stageH + "px";
+    };
+    const apply = () => {
+      raf = 0;
       const range = Math.max(journeyH - stageH, 1);
       const s = root.scrollTop;
       const p = Math.min(Math.max(s / range, 0), 1);
@@ -255,12 +260,17 @@ function initPortfolioMotion(root) {
         if (Math.abs(d) > 0.05) still = false;
         cur[key] += d * 0.22;
       }
-      card.style.left = cur.x + "px";
-      card.style.top = cur.y + "px";
       card.style.width = cur.w + "px";
       card.style.height = cur.h + "px";
       card.style.borderRadius = cur.r + "px";
-      card.style.transform = "perspective(1200px) rotateY(" + cur.rot + "deg)";
+      card.style.transform =
+        "translate3d(" +
+        cur.x.toFixed(2) +
+        "px," +
+        cur.y.toFixed(2) +
+        "px,0) perspective(1200px) rotateY(" +
+        cur.rot.toFixed(2) +
+        "deg)";
       card.style.opacity = k;
       lastY = s;
       if (!still) raf = requestAnimationFrame(apply);
@@ -269,9 +279,23 @@ function initPortfolioMotion(root) {
       if (!raf) raf = requestAnimationFrame(apply);
     };
     root.addEventListener("scroll", kick, { ...opts, passive: true });
-    window.addEventListener("resize", kick, opts);
+    const remeasure = () => {
+      measure();
+      kick();
+    };
+    window.addEventListener("resize", remeasure, opts);
+    window.addEventListener("load", remeasure, opts);
+    let ro;
+    if ("ResizeObserver" in window) {
+      ro = new ResizeObserver(remeasure);
+      ro.observe(main);
+    }
+    measure();
     apply();
-    cleanups.push(() => cancelAnimationFrame(raf));
+    cleanups.push(() => {
+      cancelAnimationFrame(raf);
+      if (ro) ro.disconnect();
+    });
   }
   // Experience roadmap: draw the winding road through the stop markers, then
   // ink it when the section scrolls into view, like the reference site.
