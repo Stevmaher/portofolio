@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://portofolio-five-gold-76.vercel.app/sitemap.xml
