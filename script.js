@@ -315,22 +315,50 @@ function initPortfolioMotion(root) {
       svg.querySelectorAll("path").forEach((pa) => pa.setAttribute("d", d));
     };
     buildRoad();
-    if (document.fonts && document.fonts.ready)
-      document.fonts.ready.then(buildRoad);
-    window.addEventListener("resize", buildRoad, opts);
-    if ("IntersectionObserver" in window) {
-      const roadObserver = new IntersectionObserver(
-        (entries) => {
-          if (entries[0].isIntersecting) {
-            roadmap.setAttribute("data-drawn", "true");
-            roadObserver.disconnect();
-          }
-        },
-        { root, threshold: 0.25 },
+    // Ink the road progressively as the visitor scrolls through the section,
+    // so the path draws itself in step with the scroll position.
+    const inkTo = () => {
+      const svg = roadmap.querySelector(".pf-road");
+      const el = roadmap.querySelector(".pf-road-ink");
+      if (!svg || !el || getComputedStyle(svg).display === "none") return;
+      if (reduced.matches) {
+        el.style.strokeDashoffset = "0";
+        return;
+      }
+      const rect = roadmap.getBoundingClientRect();
+      const vh = root.clientHeight || window.innerHeight;
+      const progress = Math.min(
+        Math.max((vh * 0.9 - rect.top) / (rect.height + vh * 0.35), 0),
+        1,
       );
-      roadObserver.observe(roadmap);
-      cleanups.push(() => roadObserver.disconnect());
-    } else roadmap.setAttribute("data-drawn", "true");
+      el.style.strokeDashoffset = (1 - progress).toFixed(4);
+    };
+    let inkFrame = 0;
+    const kickInk = () => {
+      if (inkFrame) return;
+      inkFrame = requestAnimationFrame(() => {
+        inkFrame = 0;
+        // Markers move while their reveal transition runs, so refresh the
+        // path geometry alongside the ink progress.
+        buildRoad();
+        inkTo();
+      });
+    };
+    if (document.fonts && document.fonts.ready)
+      document.fonts.ready.then(() => {
+        buildRoad();
+        inkTo();
+      });
+    window.addEventListener(
+      "resize",
+      () => {
+        buildRoad();
+        kickInk();
+      },
+      opts,
+    );
+    root.addEventListener("scroll", kickInk, { ...opts, passive: true });
+    inkTo();
   }
   // Hero code spotlight: a brighter layer of code snippets over the faint
   // static background, revealed through a soft mask that follows the cursor,

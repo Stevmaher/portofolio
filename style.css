@@ -293,6 +293,41 @@ html {
   font-weight: 600;
   letter-spacing: -0.04em;
 }
+.pf .pf-hero-socials {
+  display: flex;
+  gap: 16px;
+  justify-content: flex-end;
+  margin-top: 10px;
+  font-size: 12px;
+}
+.pf .pf-hero-socials a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.pf .pf-folder-num {
+  position: absolute;
+  top: 16px;
+  left: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  color: #faf9f699;
+}
+.pf .pf-subsection {
+  margin: 56px 0 0;
+}
+.pf .pf-bio-quote {
+  font-size: 17px;
+  font-weight: 550;
+  line-height: 1.55;
+  letter-spacing: -0.01em;
+  border-left: 2px solid var(--ink);
+  padding-left: 16px;
+}
 .pf .pf-hero-footer p {
   font-size: 15px;
   padding-bottom: 8px;
@@ -395,9 +430,10 @@ html {
 }
 .pf .pf-specimens {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 40px;
-  min-height: 430px;
+  row-gap: 72px;
+  min-height: 0;
 }
 .pf .pf-specimen {
   border-top: 2px solid var(--ink);
@@ -406,11 +442,9 @@ html {
     border-color 0.3s,
     filter 0.3s;
 }
-.pf .pf-specimen:nth-child(2) {
+.pf .pf-specimen:nth-child(2),
+.pf .pf-specimen:nth-child(4) {
   margin-top: 74px;
-}
-.pf .pf-specimen:nth-child(3) {
-  margin-top: 148px;
 }
 .pf .pf-specimen h3 {
   font-size: 30px;
@@ -650,6 +684,15 @@ html {
 .pf .pf-stop-c {
   padding-top: 20px;
 }
+.pf .pf-stop-d {
+  padding-top: 80px;
+}
+.pf .pf-stop-e {
+  padding-top: 12px;
+}
+.pf .pf-stop-f {
+  padding-top: 64px;
+}
 .pf .pf-stop-marker {
   width: 38px;
   height: 38px;
@@ -672,7 +715,8 @@ html {
 .pf .pf-stop-now .pf-stop-marker > span {
   background: var(--bg);
 }
-.pf .pf-roadmap[data-drawn="true"] .pf-stop-now .pf-stop-marker {
+.pf .pf-roadmap[data-drawn="true"] .pf-stop-now .pf-stop-marker,
+.pf.pf-motion .pf-stop-now.pf-visible .pf-stop-marker {
   animation: pf-pin 0.8s ease;
 }
 @keyframes pf-pin {
@@ -1085,7 +1129,10 @@ html {
     gap: 20px;
   }
   .pf .pf-stop-b,
-  .pf .pf-stop-c {
+  .pf .pf-stop-c,
+  .pf .pf-stop-d,
+  .pf .pf-stop-e,
+  .pf .pf-stop-f {
     padding-top: 0;
   }
   .pf .pf-stop-marker {
