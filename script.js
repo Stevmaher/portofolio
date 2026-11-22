@@ -104,38 +104,47 @@ fields.forEach((field) => {
     formStatus.textContent = "";
   });
 });
-contactForm.addEventListener("submit", (event) => {
+const SUPABASE_URL = "https://zbhrbzkknzwdgjbxgjxe.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_horLFjuslBVfj7Jsg38KaQ_Z4UUvbJK";
+contactForm.addEventListener("submit", async (event) => {
   event.preventDefault();
   const validity = fields.map(validateField);
   if (validity.includes(false)) {
     fields[validity.indexOf(false)].focus();
-    formStatus.textContent =
-      "Check the highlighted fields before creating your draft.";
+    formStatus.textContent = "Check the highlighted fields before sending.";
     return;
   }
   const data = new FormData(contactForm);
-  const name = data.get("name").trim();
-  const subject = "Portfolio inquiry from " + name;
-  const body =
-    data.get("message").trim() +
-    "\n\nFrom: " +
-    name +
-    " (" +
-    data.get("email").trim() +
-    ")";
-  const email = document.querySelector(".pf-email").href.split("?")[0];
-  const draft = document.createElement("a");
-  draft.href =
-    email +
-    "?subject=" +
-    encodeURIComponent(subject) +
-    "&body=" +
-    encodeURIComponent(body);
-  document.body.appendChild(draft);
-  draft.click();
-  draft.remove();
-  formStatus.textContent =
-    "Email draft requested. Review and send it in your email app. If nothing opened, use the email link. No message has been sent by this website.";
+  const payload = {
+    name: data.get("name").trim(),
+    email: data.get("email").trim(),
+    message: data.get("message").trim(),
+  };
+  const submitButton = contactForm.querySelector("button[type=submit]");
+  submitButton.disabled = true;
+  formStatus.textContent = "Sending\u2026";
+  try {
+    const response = await fetch(SUPABASE_URL + "/rest/v1/contact_messages", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        apikey: SUPABASE_ANON_KEY,
+        Authorization: "Bearer " + SUPABASE_ANON_KEY,
+        Prefer: "return=minimal",
+      },
+      body: JSON.stringify(payload),
+    });
+    if (!response.ok) throw new Error("status " + response.status);
+    contactForm.reset();
+    fields.forEach((field) => field.removeAttribute("aria-invalid"));
+    formStatus.textContent =
+      "Message sent. Thanks for reaching out, I'll get back to you soon.";
+  } catch (error) {
+    formStatus.textContent =
+      "The message could not be sent. Please use the email link instead.";
+  } finally {
+    submitButton.disabled = false;
+  }
 });
 
 function initPortfolioMotion(root) {
