@@ -190,7 +190,7 @@ try {
     "Dialog checks",
   );
   assert(
-    interactions.some((r) => r.draft?.startsWith("mailto:")),
+    interactions.some((r) => r.draft?.startsWith("mailto:estevanmaher5@gmail.com?subject=Portfolio%20inquiry%20from%20QA%20Test&body=")),
     "Draft URL not generated",
   );
   console.log(
