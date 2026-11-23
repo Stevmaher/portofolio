@@ -76,7 +76,9 @@ document.querySelectorAll(".pf-dialog").forEach((dialog) => {
 
 const contactForm = document.querySelector(".pf-contact-form");
 const formStatus = contactForm.querySelector(".pf-form-status");
-const fields = [...contactForm.querySelectorAll("input, textarea")];
+const fields = [
+  ...contactForm.querySelectorAll("input:not([data-honeypot]), textarea"),
+];
 // Keep native validation as the no-JS fallback, add explicit inline feedback.
 contactForm.noValidate = true;
 function validateField(field) {
@@ -106,12 +108,37 @@ fields.forEach((field) => {
 });
 const SUPABASE_URL = "https://zbhrbzkknzwdgjbxgjxe.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_horLFjuslBVfj7Jsg38KaQ_Z4UUvbJK";
+// These browser-only checks reduce simple automated submissions. They are
+// not a security boundary or a substitute for server-side rate limiting.
+const SUCCESS_MESSAGE =
+  "Message sent. Thanks for reaching out, I'll get back to you soon.";
+const formLoadedAt = Date.now();
+const MIN_SUBMIT_MS = 3000;
+const SUBMIT_COOLDOWN_MS = 30000;
+let lastSubmitAt = 0;
+let submitInFlight = false;
+const honeypot = contactForm.querySelector("[data-honeypot]");
 contactForm.addEventListener("submit", async (event) => {
   event.preventDefault();
+  if (submitInFlight) return;
+  if (honeypot && honeypot.value.trim()) {
+    formStatus.textContent =
+      "The message could not be sent. Please use the email link instead.";
+    return;
+  }
   const validity = fields.map(validateField);
   if (validity.includes(false)) {
     fields[validity.indexOf(false)].focus();
     formStatus.textContent = "Check the highlighted fields before sending.";
+    return;
+  }
+  if (Date.now() - formLoadedAt < MIN_SUBMIT_MS) {
+    formStatus.textContent = "Please wait a moment, then send your message again.";
+    return;
+  }
+  if (lastSubmitAt && Date.now() - lastSubmitAt < SUBMIT_COOLDOWN_MS) {
+    formStatus.textContent =
+      "You just sent a message. Please wait a moment before sending another.";
     return;
   }
   const data = new FormData(contactForm);
@@ -121,6 +148,7 @@ contactForm.addEventListener("submit", async (event) => {
     message: data.get("message").trim(),
   };
   const submitButton = contactForm.querySelector("button[type=submit]");
+  submitInFlight = true;
   submitButton.disabled = true;
   formStatus.textContent = "Sending\u2026";
   try {
@@ -137,12 +165,13 @@ contactForm.addEventListener("submit", async (event) => {
     if (!response.ok) throw new Error("status " + response.status);
     contactForm.reset();
     fields.forEach((field) => field.removeAttribute("aria-invalid"));
-    formStatus.textContent =
-      "Message sent. Thanks for reaching out, I'll get back to you soon.";
+    lastSubmitAt = Date.now();
+    formStatus.textContent = SUCCESS_MESSAGE;
   } catch (error) {
     formStatus.textContent =
       "The message could not be sent. Please use the email link instead.";
   } finally {
+    submitInFlight = false;
     submitButton.disabled = false;
   }
 });
@@ -559,4 +588,4 @@ if ("IntersectionObserver" in window) {
   document
     .querySelectorAll("main>section")
     .forEach((section) => activeSections.observe(section));
-}
+          }
