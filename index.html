@@ -196,7 +196,9 @@
             <p>
               Responsive interfaces.
               <br />
-              Built with React &amp; JavaScript.
+              Built with HTML, CSS &amp; JavaScript.
+              <br />
+              React in the projects below.
             </p>
             <a class="pf-text-link" href="#projects">
               Explore my work &searrow;
@@ -832,6 +834,21 @@
                 rows="4"
               ></textarea>
               <span class="pf-field-error" id="error-message"> </span>
+              <!-- Honeypot: hidden from sighted and keyboard users. A real
+                   visitor never fills the "website" field; bots do. The
+                   form script discards such submissions without sending.
+                   Keep this inside the form so it is submitted with it. -->
+              <div aria-hidden="true" class="pf-honeypot">
+                <label for="contact-website"> Website </label>
+                <input
+                  autocomplete="off"
+                  data-honeypot=""
+                  id="contact-website"
+                  name="website"
+                  tabindex="-1"
+                  type="text"
+                />
+              </div>
               <button class="pf-button" type="submit">
                 Send message
                 <span aria-hidden="true"> &nearrow; </span>
@@ -901,11 +918,6 @@
           </button>
         </div>
         <div class="pf-dialog-body">
-          <noscript>
-            <a class="pf-text-link" href="#projects">
-              Return to projects &uarr;
-            </a>
-          </noscript>
           <h2 id="title-waad" tabindex="-1">
             Waad
             <span dir="rtl" lang="ar"> وعد </span>
@@ -1056,11 +1068,6 @@
           </button>
         </div>
         <div class="pf-dialog-body">
-          <noscript>
-            <a class="pf-text-link" href="#projects">
-              Return to projects &uarr;
-            </a>
-          </noscript>
           <h2 id="title-axiom" tabindex="-1">AXIOM</h2>
           <p class="pf-dialog-lead">
             Animal merge analysis for Al-Fatehoon players, helping evaluate
@@ -1184,11 +1191,6 @@
           </button>
         </div>
         <div class="pf-dialog-body">
-          <noscript>
-            <a class="pf-text-link" href="#projects">
-              Return to projects &uarr;
-            </a>
-          </noscript>
           <h2 id="title-voyara" tabindex="-1">VOYARA Travel</h2>
           <p class="pf-dialog-lead">
             A bilingual travel landing page for an Egyptian audience, balancing
@@ -1309,11 +1311,6 @@
           </button>
         </div>
         <div class="pf-dialog-body">
-          <noscript>
-            <a class="pf-text-link" href="#projects">
-              Return to projects &uarr;
-            </a>
-          </noscript>
           <h2 id="title-glass-admin" tabindex="-1">Glass Admin</h2>
           <p class="pf-dialog-lead">
             A glassmorphism admin dashboard with a bilingual English and
