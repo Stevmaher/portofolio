@@ -736,6 +736,81 @@
                 </a>
               </div>
             </article>
+            <article class="pf-project-folder" id="project-nara-botanicals">
+              <button
+                aria-haspopup="dialog"
+                class="pf-folder pf-reveal"
+                data-open="nara-botanicals"
+                style="--delay: 300ms"
+              >
+                <span class="pf-folder-scene">
+                  <span class="pf-folder-back"> </span>
+                  <span class="pf-paper pf-paper-back">
+                    Nara Botanicals
+                    <small> Project overview </small>
+                  </span>
+                  <span class="pf-paper pf-paper-preview">
+                    <span class="pf-mini">
+                      <img
+                        alt="Nara Botanicals landing page with a hero shelf of botanical skincare bottles"
+                        class="pf-mini-img"
+                        decoding="async"
+                        height="1050"
+                        loading="lazy"
+                        sizes="(max-width: 700px) 260px, 300px"
+                        src="assets/shots/nara-botanicals-presentation.webp"
+                        srcset="
+                          assets/shots/nara-botanicals-presentation-480.webp  480w,
+                          assets/shots/nara-botanicals-presentation-800.webp  800w,
+                          assets/shots/nara-botanicals-presentation.webp     1600w
+                        "
+                        width="1600"
+                      />
+                    </span>
+                    <small> Details &nearrow; </small>
+                  </span>
+                  <span class="pf-folder-front">
+                    <span class="pf-folder-num"> 06 </span>
+                    <strong> Nara Botanicals </strong>
+                    <span class="pf-square"> &nearrow; </span>
+                  </span>
+                </span>
+                <span class="pf-folder-caption">
+                  E-commerce concept website
+                  <span> View project &nearrow; </span>
+                </span>
+              </button>
+              <p class="pf-project-summary">
+                A concept website for a fictional skincare brand, with a zoomable product shelf, a working shopping bag and a scrolling photo strip.
+              </p>
+              <ul aria-label="Technologies" class="pf-chips">
+                <li>HTML</li>
+                <li>CSS</li>
+                <li>JavaScript</li>
+              </ul>
+              <div class="pf-actions">
+                <a
+                  class="pf-button"
+                  href="https://racing-marsh-u5td9t7.tmp.now/"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  Live demo
+                  <span aria-hidden="true"> &nearrow; </span>
+                  <span class="sr-only"> (opens in new tab) </span>
+                </a>
+                <a
+                  class="pf-button pf-button-outline"
+                  href="https://github.com/Stevmaher/nara-botanicals"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  GitHub source
+                  <span aria-hidden="true"> &nearrow; </span>
+                  <span class="sr-only"> (opens in new tab) </span>
+                </a>
+              </div>
+            </article>
           </div>
         </section>
         <section class="pf-section pf-wrap" id="experience">
@@ -1605,6 +1680,87 @@
             <a
               class="pf-button pf-button-outline"
               href="https://github.com/Stevmaher/ember-cables"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              GitHub source
+              <span aria-hidden="true"> &nearrow; </span>
+              <span class="sr-only"> (opens in new tab) </span>
+            </a>
+          </div>
+        </div>
+      </dialog>
+      <dialog
+        aria-labelledby="title-nara-botanicals"
+        class="pf-dialog"
+        id="pf-dialog-nara-botanicals"
+      >
+        <div class="pf-dialog-top">
+          <p class="pf-eyebrow">E-commerce concept website</p>
+          <button
+            aria-label="Close Nara Botanicals case study"
+            class="pf-close"
+            data-close=""
+            type="button"
+          >
+            &times;
+          </button>
+        </div>
+        <div class="pf-dialog-body">
+          <h2 id="title-nara-botanicals" tabindex="-1">Nara Botanicals</h2>
+          <p class="pf-dialog-lead">
+            A concept website for a fictional skincare brand, with a zoomable product shelf, a working shopping bag and a scrolling photo strip.
+          </p>
+          <ul aria-label="Technologies" class="pf-chips">
+            <li>HTML</li>
+                <li>CSS</li>
+                <li>JavaScript</li>
+          </ul>
+          <figure>
+            <img
+              alt="Nara Botanicals landing page with a hero shelf of botanical skincare bottles"
+              height="1050"
+              loading="lazy"
+              sizes="(max-width: 700px) calc(100vw - 80px), 860px"
+              src="assets/shots/nara-botanicals-presentation.webp"
+              srcset="
+                assets/shots/nara-botanicals-presentation-480.webp  480w,
+                assets/shots/nara-botanicals-presentation-800.webp  800w,
+                assets/shots/nara-botanicals-presentation.webp     1600w
+              "
+              width="1600"
+            />
+            <figcaption>
+              Nara is a fictional brand. The site is a design and front-end
+              concept, not a real company.
+            </figcaption>
+          </figure>
+          <div class="pf-case-grid">
+            <section><h3>The problem</h3><p>Small skincare brands often have sites that feel generic, with flat product grids that give little sense of the products or the brand.</p></section>
+            <section><h3>The solution</h3><p>A calm, editorial storefront built around a product shelf you can zoom into, with a cart that works end to end.</p></section>
+            <section><h3>My contribution</h3><p>Designed and built the whole site: layout, brand, motion, cart logic and mobile layout. Photos are licensed from Unsplash.</p></section>
+            <section><h3>Key features</h3><ul>
+                <li>Shelf of products that zooms in on interaction</li>
+                <li>Working shopping bag: add, remove and totals, opened only from the Bag button</li>
+                <li>Seamless one-direction photo marquee</li>
+                <li>Contact page and responsive mobile menu</li></ul></section>
+            <section><h3>Technical implementation</h3><p>Plain HTML, CSS and JavaScript with no framework. Cart state lives in JavaScript and animations use CSS transforms.</p></section>
+            <section><h3>Challenge &amp; approach</h3><p>Making the strip loop without a visible jump and keeping the shelf zoom smooth on phones, solved with duplicated tracks and transform-only animation.</p></section>
+          </div>
+          <div class="pf-actions">
+            <a
+              class="pf-button"
+              href="https://racing-marsh-u5td9t7.tmp.now/"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              Live demo
+              <span aria-hidden="true"> &nearrow; </span>
+              <span class="sr-only"> (opens in new tab) </span>
+            </a>
+            <a
+              class="pf-button pf-button-outline"
+              href="https://github.com/Stevmaher/nara-botanicals"
               rel="noopener noreferrer"
               target="_blank"
             >
