@@ -658,6 +658,74 @@
                 </a>
               </div>
             </article>
+            <article class="pf-project-folder" id="project-ember-cables">
+              <button
+                aria-haspopup="dialog"
+                class="pf-folder pf-reveal"
+                data-open="ember-cables"
+                style="--delay: 240ms"
+              >
+                <span class="pf-folder-scene">
+                  <span class="pf-folder-back"> </span>
+                  <span class="pf-paper pf-paper-back">
+                    Ember Cables
+                    <small> Project overview </small>
+                  </span>
+                  <span class="pf-paper pf-paper-preview">
+                    <span class="pf-mini">
+                      <img
+                        alt="Ember Cables landing page with a 3D twisted copper cable and glowing Earth"
+                        class="pf-mini-img"
+                        decoding="async"
+                        height="1050"
+                        loading="lazy"
+                        sizes="(max-width: 700px) 260px, 300px"
+                        src="assets/shots/ember-cables-presentation.webp"
+                        srcset="
+                          assets/shots/ember-cables-presentation-480.webp  480w,
+                          assets/shots/ember-cables-presentation-800.webp  800w,
+                          assets/shots/ember-cables-presentation.webp     1600w
+                        "
+                        width="1600"
+                      />
+                    </span>
+                    <small> Details &nearrow; </small>
+                  </span>
+                  <span class="pf-folder-front">
+                    <span class="pf-folder-num"> 05 </span>
+                    <strong> Ember Cables </strong>
+                    <span class="pf-square"> &nearrow; </span>
+                  </span>
+                </span>
+                <span class="pf-folder-caption">
+                  3D concept website
+                  <span> View project &nearrow; </span>
+                </span>
+              </button>
+              <p class="pf-project-summary">
+                A concept website for a fictional cable manufacturer, built
+                around a real-time 3D cable that follows the scroll and opens
+                up on hover to show the wires inside.
+              </p>
+              <ul aria-label="Technologies" class="pf-chips">
+                <li>Three.js</li>
+                <li>WebGL</li>
+                <li>JavaScript</li>
+                <li>CSS</li>
+              </ul>
+              <div class="pf-actions">
+                <a
+                  class="pf-button"
+                  href="https://ember-cables-preview.vercel.app"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  Live demo
+                  <span aria-hidden="true"> &nearrow; </span>
+                  <span class="sr-only"> (opens in new tab) </span>
+                </a>
+              </div>
+            </article>
           </div>
         </section>
         <section class="pf-section pf-wrap" id="experience">
@@ -1412,6 +1480,115 @@
               target="_blank"
             >
               GitHub source
+              <span aria-hidden="true"> &nearrow; </span>
+              <span class="sr-only"> (opens in new tab) </span>
+            </a>
+          </div>
+        </div>
+      </dialog>
+      <dialog
+        aria-labelledby="title-ember-cables"
+        class="pf-dialog"
+        id="pf-dialog-ember-cables"
+      >
+        <div class="pf-dialog-top">
+          <p class="pf-eyebrow">3D concept website</p>
+          <button
+            aria-label="Close Ember Cables case study"
+            class="pf-close"
+            data-close=""
+            type="button"
+          >
+            &times;
+          </button>
+        </div>
+        <div class="pf-dialog-body">
+          <h2 id="title-ember-cables" tabindex="-1">Ember Cables</h2>
+          <p class="pf-dialog-lead">
+            A concept website for a fictional cable manufacturer, built around
+            a real-time 3D cable that follows the scroll and opens up on hover
+            to show the wires inside.
+          </p>
+          <ul aria-label="Technologies" class="pf-chips">
+            <li>Three.js</li>
+            <li>WebGL</li>
+            <li>JavaScript</li>
+            <li>CSS</li>
+          </ul>
+          <figure>
+            <img
+              alt="Ember Cables landing page with a 3D twisted copper cable and glowing Earth"
+              height="1050"
+              loading="lazy"
+              sizes="(max-width: 700px) calc(100vw - 80px), 860px"
+              src="assets/shots/ember-cables-presentation.webp"
+              srcset="
+                assets/shots/ember-cables-presentation-480.webp  480w,
+                assets/shots/ember-cables-presentation-800.webp  800w,
+                assets/shots/ember-cables-presentation.webp     1600w
+              "
+              width="1600"
+            />
+            <figcaption>
+              Ember is a fictional brand. The site is a design and front-end
+              concept, not a real company.
+            </figcaption>
+          </figure>
+          <div class="pf-case-grid">
+            <section>
+              <h3>The problem</h3>
+              <p>
+                Industrial product sites often look flat and generic, even when
+                the product itself is something people could see and touch.
+              </p>
+            </section>
+            <section>
+              <h3>The solution</h3>
+              <p>
+                A scroll-driven story where one continuous 3D cable links every
+                section, so the product is the interface.
+              </p>
+            </section>
+            <section>
+              <h3>My contribution</h3>
+              <p>
+                Designed and built the whole site: layout, 3D scene, motion and
+                interactions.
+              </p>
+            </section>
+            <section>
+              <h3>Key features</h3>
+              <ul>
+                <li>Real-time 3D cable with a glossy sheath and twisted copper wires</li>
+                <li>Hover or tap the cable to reveal the wires inside</li>
+                <li>Glowing 3D Earth the cable connects to</li>
+                <li>Black and red theme with a cream contrast section</li>
+              </ul>
+            </section>
+            <section>
+              <h3>Technical implementation</h3>
+              <p>
+                Plain HTML, CSS and JavaScript with Three.js for the 3D scene.
+                The cable path is tied to scroll position and the scene is
+                lit and animated in real time.
+              </p>
+            </section>
+            <section>
+              <h3>Challenge &amp; approach</h3>
+              <p>
+                Keeping a heavy 3D scene smooth while scrolling, so the cable
+                and the page content move together without lag.
+              </p>
+            </section>
+          </div>
+          <div class="pf-actions">
+            <a
+              class="pf-button"
+              href="https://ember-cables-preview.vercel.app"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              Live demo
               <span aria-hidden="true"> &nearrow; </span>
               <span class="sr-only"> (opens in new tab) </span>
             </a>
